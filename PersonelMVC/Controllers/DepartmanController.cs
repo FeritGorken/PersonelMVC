@@ -11,6 +11,7 @@ namespace PersonelMVC.Controllers
     {
         PersonelDbEntities db = new PersonelDbEntities();
         // GET: Departman
+        
         public ActionResult Index()
         {
             var model=db.Departman.ToList();
