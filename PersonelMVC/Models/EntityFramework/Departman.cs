@@ -23,6 +23,7 @@ namespace PersonelMVC.Models.EntityFramework
     
         public int Id { get; set; }
         [Display(Name = "Departman Adý")]
+        [Required(ErrorMessage ="Departman Adý Zorunludur...")]
         public string Ad { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -22,7 +22,9 @@ namespace PersonelMVC.Controllers
         {
             var model = new PersonelFormViewModel()
             {
-                Departmanlar = db.Departman.ToList()
+                Departmanlar = db.Departman.ToList(),
+                Personel=new Personel()
+               
             };
             return View("PersonelForm",model);
         }
@@ -37,6 +39,15 @@ namespace PersonelMVC.Controllers
         }
         public ActionResult Kaydet(Personel personel)
         {
+            if (!ModelState.IsValid)
+            {
+                var model = new PersonelFormViewModel()
+                {
+                    Departmanlar = db.Departman.ToList(),
+                    Personel = personel
+                };
+                return View("PersonelForm",model);
+            }
             if (personel.Id == 0)
             {
                 db.Personel.Add(personel);

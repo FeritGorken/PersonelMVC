@@ -17,13 +17,20 @@ namespace PersonelMVC.Models.EntityFramework
     {
         public int Id { get; set; }
         [Display(Name ="Departman Adý")]
+        [Required(ErrorMessage ="Lütfen Bir Departman Seçiniz...")]
         public Nullable<int> DepartmanId { get; set; }
+        [Required(ErrorMessage = "Ad Alaný Zorunludur...")]
         public string Ad { get; set; }
+        [Required(ErrorMessage = "Soyad Alaný Zorunludur...")]
         public string Soyad { get; set; }
         [Display(Name = "Maaþ")]
+        [Required(ErrorMessage = "Maaþ Alaný Zorunludur...")]
+        [Range(1399,5000,ErrorMessage = "Maaþ Alaný 1400 ile 5000 Arasýnda olmalýdýr...")]
         public Nullable<short> Maas { get; set; }
         [Display(Name = "Doðum Tarihi")]
+        [Required(ErrorMessage = "Doðum Tarihi Alaný Zorunludur...")]
         public Nullable<System.DateTime> DogumTarihi { get; set; }
+        [Required(ErrorMessage = "Cinsiyet Belirtiniz Zorunludur...")]
         public bool Cinsiyet { get; set; }
         [Display(Name = "Evlilik Durumu")]
         public bool EvliMi { get; set; }
