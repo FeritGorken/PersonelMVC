@@ -9,6 +9,7 @@ using PersonelMVC.ViewModels;
 
 namespace PersonelMVC.Controllers
 {
+    [Authorize(Roles = "A,U")]
     public class PersonelController : Controller
     {
         PersonelDbEntities db = new PersonelDbEntities();
@@ -18,6 +19,7 @@ namespace PersonelMVC.Controllers
             var model = db.Personel.Include(x=>x.Departman).ToList();
             return View(model);
         }
+       
         public ActionResult Yeni()
         {
             var model = new PersonelFormViewModel()
