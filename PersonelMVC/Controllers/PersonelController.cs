@@ -14,6 +14,7 @@ namespace PersonelMVC.Controllers
     {
         PersonelDbEntities db = new PersonelDbEntities();
         // GET: Personel
+        [OutputCache(Duration =30)]
         public ActionResult Index()
         {
             var model = db.Personel.Include(x=>x.Departman).ToList();
@@ -75,6 +76,13 @@ namespace PersonelMVC.Controllers
         {
             var model = db.Personel.Where(x => x.DepartmanId == id).ToList();
             return PartialView(model);
+        }
+
+        public ActionResult ToplamMaas()
+        {
+            ViewBag.Maas = db.Personel.Sum(x => x.Maas);
+            return PartialView();
+            
         }
     }
 }

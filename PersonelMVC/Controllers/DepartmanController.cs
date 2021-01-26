@@ -1,4 +1,5 @@
 ﻿using PersonelMVC.Models.EntityFramework;
+using PersonelMVC.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,6 @@ namespace PersonelMVC.Controllers
     {
         PersonelDbEntities db = new PersonelDbEntities();
         // GET: Departman
-        
         public ActionResult Index()
         {
             var model=db.Departman.ToList();
@@ -31,9 +31,11 @@ namespace PersonelMVC.Controllers
             {
                 return View("DepartmanForm");
             }
+            MesajViewModel model = new MesajViewModel();
             if (departman.Id==0)
             {
                 db.Departman.Add(departman);
+                model.Mesaj = departman.Ad + " başarıyla eklendi";
  
             }
             else
@@ -42,10 +44,14 @@ namespace PersonelMVC.Controllers
                 if (guncellenecekDepartman == null)
                     return HttpNotFound();
                 guncellenecekDepartman.Ad = departman.Ad;
-             
+                model.Mesaj = departman.Ad + " başarıyla güncellendi";
+
             }
             db.SaveChanges();
-            return RedirectToAction("Index", "Departman");
+            model.Status = true;
+            model.LinkText = "Departman Listesi";
+            model.Url = "/Departman";
+            return View("_Mesaj",model);
         }
         public ActionResult Guncelle(int id)
         {
